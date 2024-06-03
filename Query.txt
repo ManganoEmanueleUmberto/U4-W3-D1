@@ -1,0 +1,48 @@
+Exercise 1
+	
+	SELECT * FROM public."Clienti"
+	WHERE nome = 'Mario'
+
+Exercise 2
+
+	SELECT nome,cognome FROM public."Clienti"
+	WHERE anno_di_nascita = 1982
+	ORDER BY numero_cliente
+
+Exercise 3
+
+	SELECT numero_fattura FROM public."Fatture"
+	WHERE iva = 20
+	ORDER BY numero_fattura ASC 
+
+Exercise 4
+
+	SELECT * FROM public."Prodotti"
+	WHERE in_produzione = true AND EXTRACT(YEAR FROM data_attivazione)= 2017
+	ORDER BY id_prodotto ASC 
+
+Exercise 5
+
+	SELECT * FROM public."Fatture"
+	JOIN public."Clienti" ON public."Fatture".id_cliente = public."Clienti".numero_cliente
+	WHERE importo < 1000 
+	ORDER BY numero_fattura ASC 
+
+Exercise 6
+
+	SELECT numero_fattura,importo,iva,data_fattura,denominazione FROM public."Fatture"
+	JOIN public."Fornitori" USING(numero_fornitore) 
+	ORDER BY numero_fattura ASC 
+
+Exercise 7
+
+	SELECT  EXTRACT(YEAR FROM data_fattura) AS anno, COUNT(*) AS numero_fatture FROM public."Fatture"
+	WHERE iva = 20
+	GROUP BY EXTRACT(YEAR FROM data_fattura)
+	ORDER BY anno
+
+Exercise 8
+
+	SELECT  EXTRACT(YEAR FROM data_fattura) AS anno, COUNT(*) AS numero_fatture, SUM(importo) as importo_annuo FROM public."Fatture"
+	GROUP BY EXTRACT(YEAR FROM data_fattura)
+	ORDER BY anno

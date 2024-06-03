@@ -18,7 +18,7 @@ Exercise 3
 Exercise 4
 
 	SELECT * FROM public."Prodotti"
-	WHERE in_produzione = true AND EXTRACT(YEAR FROM data_attivazione)= 2017
+	WHERE in_produzione = true AND EXTRACT(YEAR FROM data_attivazione) = 2017
 	ORDER BY id_prodotto ASC 
 
 Exercise 5
@@ -46,3 +46,16 @@ Exercise 8
 	SELECT  EXTRACT(YEAR FROM data_fattura) AS anno, COUNT(*) AS numero_fatture, SUM(importo) as importo_annuo FROM public."Fatture"
 	GROUP BY EXTRACT(YEAR FROM data_fattura)
 	ORDER BY anno
+
+Exercise 9 
+
+	SELECT c.regione_di_residenza, SUM(f.importo) as totale_importi FROM public."Fatture" f
+	JOIN public."Clienti" c ON f.id_cliente = c.numero_cliente
+	GROUP BY c.regione_di_residenza;
+
+Exercise 10 
+
+	SELECT COUNT(DISTINCT numero_cliente) as numero_clienti FROM public."Clienti" AS c
+	JOIN public."Fatture" AS f ON c.numero_cliente = f.id_cliente 
+	WHERE anno_di_nascita = 1980 AND importo > 50
+  
